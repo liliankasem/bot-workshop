@@ -167,7 +167,7 @@ Also notice your app is using port 8080. Keep a note of this as you will need to
 1. Keep your bot application running from the previous steps and make a note of the endpoint
     - If you've already closed the application, run your bot application again
     - Depending on which steps you followed, you endpoint should be `http://localhost:3978/api/messages` or `http://localhost:8080/api/messages`
-    
+
 2. Open the Bot Emulator and enter your endpoint where it says "Enter your endpoint URL"
 
     ![Emulator](images/emulator1.png)
@@ -241,12 +241,12 @@ You can have the ability to define relationships between entities based on hered
 
 ### Using Pre-Built Entities 
 Next, we are going to add a Pre-Built datetime entity. 
+
 1.	To add a Pre-Built Entity, click “+” next to “Pre-built Entities” at the left of the screen.
 2.	Scroll down and select “datetime” from the lift of Pre-Built entities” 
 3.	Then click “Ok”. It’s as easy as that. 
 
     ![LUIS](images/luis6.png)
-
 
 ### Training your model
 Now that we have the intents and entities defined, we now need to provide more examples of utterances that illustrate these concepts. Click the text box at the top of the screen and start typing in example utterances. You will need to input and label at least five examples of each intent in order to get an accurate model. 
@@ -354,7 +354,7 @@ This next section will show you how to connect all the dots together and get you
 
 2. You can either setup an environment variable called `LUIS_MODEL` with your LUIS endpoint or just replace `process.env.LUIS_MODEL;` in index.js
 
-The above code has setup the LUIS model and matched our intents to dialogs in our application i.e. if the intent is `GetWeather` the `getWeather` bot dialog will be launched. Now we need to create the actaul dialogs that will be called.
+    The above code has setup the LUIS model and matched our intents to dialogs in our application i.e. if the intent is `GetWeather` the `getWeather` bot dialog will be launched. Now we need to create the actaul dialogs that will be called.
 
 3. Delete any existing dialogs you have in the `Bots Dialogs` section and copy in this code:
 
@@ -379,7 +379,7 @@ The above code has setup the LUIS model and matched our intents to dialogs in ou
 5. Go to the bot emulator and start entering test queries. When a intent of “GetWeather” is triggered, the bot will return a “GetWeather intent” message, intent of “BookFlight” will return “BookFlight intent”, and a “None” intent will return “No Intent”.  
 
 ## Additional Resources
-[Bot Framework Samples for both Node and C#](https://github.com/Microsoft/BotBuilder-Samples)
+[Bot Framework Samples for Node and C#](https://github.com/Microsoft/BotBuilder-Samples)
 
 [Blog containing a master list of Bot Framework tutorials, samples and projects](https://blogs.msdn.microsoft.com/smich/2016/09/30/microsoft-bot-framework-resources/)
 
@@ -390,3 +390,5 @@ Credit for writing the original C# workshop:
 - Darren Jefford
 - Anthony Sadarangani
 - Travis Hilbert
+
+Please submit a pull request if you find mistakes or have something to add, thanks!
