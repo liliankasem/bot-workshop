@@ -26,25 +26,19 @@ You must have the following to complete this lab:
 
 ## Contents
 EXERCISE 1: CREATE A BOT
-
-- Task 1 – Register a Bot
+- Task 1 – [Register a Bot](#register-a-bot)
 - Task 2 – Create a new Bot Application
-    - Click here for C#
-    - Click here for Node
-- Task 3 – Communicate with the bot in the Bot Emulator
+    - [Click here for C#](#create-a-new-bot-application-in-csharp)
+    - [Click here for Node](#create-a-new-bot-application-in-node)
+- Task 3 – [Communicate with the bot in the Bot Emulator](#communicate-with-the-bot-in-the-bot-emulator)
 
 EXERCISE 2: ADD A LUIS MODEL
-
-- Task 1 – Create an Application
-- Task 2 – Adding Intents, Entities, and Labels
+- Task 1 – [Create a LUIS Application](#create-a-luis-application)
+- Task 2 – [Adding Intents](#adding-intents)
 
 EXERCISE 3: CONNECTING THE DOTS
-
-- Task 1 – Connect to LUIS
-- Task 2 – Finishing touches
-
-Exercise 3 for C#
-Exercise 3 for Node
+- [In C#](#connecting-to-luis-in-csharp)
+- [In Node](#connecting-to-luis-in-node)
 
 ## Setup
 You must perform the following steps to prepare your computer for this lab:
@@ -59,14 +53,14 @@ First, install the [Bot Framework Emulator](https://aka.ms/bf-bc-emulator).
 
 ### C# (Mac)
 1.	Install [Visual Studio for Mac Preview](https://www.visualstudio.com/vs/visual-studio-mac)
-2.	Download ‘MyFirstBot’ project from this [workshops GitHub repo](https://github.com/liliankasem/bot-workshop/master/MyFirstBot)
+2.	Download ‘MyFirstBot’ project from this [workshops GitHub repo](https://github.com/liliankasem/bot-workshop/tree/master/MyFirstBot)
 
 ### Node
 1.	Install [Node JS](https://nodejs.org/en/)
 
 ## EXERCISE 1: CREATE A BOT
 
-### Task 1 - Register a Bot
+### Register a Bot
 Before we begin, we need to register a new bot on the bot framework website.
 - Go to https://dev.botframework.com/  and click “Register a bot” at the top of the screen. 
 
@@ -87,7 +81,7 @@ Before we begin, we need to register a new bot on the bot framework website.
 
 - Fill out the rest of the required fields. Then click “Register”. 
 
-### Task 2 - Create a new Bot Application (C#)
+### Create a new Bot Application in CSharp
 If you are doing this lab on a MacBook (OSX): as there is not currently a Bot Framework template for Visual Studio Mac, use the MyFirstBot project as your starting application for developing a C# bot on OSX. This application is exactly the same result you would get if you follow the steps below on Windows.
 
 1. In a new instance of Visual Studio 2015, choose **File > New> Project** to open the New Project dialog. Navigate to **Installed > Templates > Visual C#** and select the **Bot Application** template.
@@ -112,7 +106,7 @@ When the application launches, you may see a 404 Error `System.Web.HttpException
 Also notice your app is using port 8080. Keep a note of this as you will need to use this address in the bot emulator to communicate with your bot: `http://localhost:8080/api/messages`
 
 
-### Task 2 - Create a new Bot Application (Node)
+### Create a new Bot Application in Node
 
 1. Make sure you have Node JS install (link provided in setup section) 
 2. Open terminal or command prompt
@@ -171,7 +165,7 @@ bot.dialog('/', function(session){
 
 ![Create a new bot](images/nodebot4.png)
 
-### Task 3 - Communicate with the bot in the Bot Emulator
+### Communicate with the bot in the Bot Emulator
 
 1. Keep your bot application running from the previous steps and make a note of the endpoint
     - If you've already closed the application, run your bot application again
@@ -205,7 +199,7 @@ You can fill these fields in with the values we got when we registered our bot i
 
 ## EXERCISE 2: ADD A LUIS MODEL
 
-### Task 1 - Create a LUIS application
+### Create a LUIS Application
 
 1.	Go to [luis.ai](https://luis.ai) and log in. 
 2.	Click “New App” in the top left corner of the page and click “New Application” from the drop down menu.
@@ -218,7 +212,7 @@ You can fill these fields in with the values we got when we registered our bot i
 
 4. When your application is finished provisioning, it will take you to the main page of your new LUIS model. Next, you will train your Luis model.
 
-### Task 2 - Adding Intents, Entities, and Labels 
+### Adding Intents
 Next, we will add two intents to the application.  
 
 1. Click the “+” next to intents and make a “BookFlight” intent. Name it “BookFlight” and give it an example utterance, “Book flight to Paris”, then click save. 
@@ -258,10 +252,10 @@ Next click “Train”, located at the bottom left of the page, and wait for the
 
 Now it’s time to connect the dots. 
 
-## EXERCISE 3: CONNECTING THE DOTS (C#)
+## EXERCISE 3: CONNECTING THE DOTS
 This next section will show you how to connect all the dots together and get your bot to recognize utterances entered into the bot emulator.  
 
-### Task 1 - Connecting to LUIS
+### Connecting to LUIS in CSharp
 
 1. Go back to the echo bot you made earlier. Add a new folder and name it “TravelApp”. Inside that new file, add a new class named “LUISApp”. This is where the code for your LUIS model will live. 
 
@@ -340,8 +334,7 @@ public class MessagesController : ApiController
 6. Go to the bot emulator and start entering test queries. When an intent of “GetWeather” is triggered, the bot will return “GetWeather”, and the intent of “BookFlight” will return “BookFlight”, and a “None” intent will return “No Intent”.  
 
 
-## EXERCISE 3: CONNECTING THE DOTS (Node)
-This next section will show you how to connect all the dots together and get your bot to recognize utterances entered into the bot emulator.
+### Connecting to LUIS in Node
 
 1. Go back to the echo bot you made earlier and insert the following code into `index.js` (before the bot dialogs, and after `server.post('/api/messages', connector.listen());`)
 
