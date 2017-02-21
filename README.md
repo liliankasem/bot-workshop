@@ -1,13 +1,5 @@
 # Microsoft Bot Framework Workshop
 
-By Lilian Kasem, February 2017
-
-Credit for writing the original C# workshop:
-- Darren Jefford
-- Anthony Sadarangani
-- Travis Hilbert
-
-
 ## Overview
 Microsoft Bot Framework is a comprehensive offering to build and deploy high quality bots for your users to enjoy in their favorite conversation experiences. Developers writing bots all face the same problems: bots require basic I/O; they must have language and dialog skills; they must be performant, responsive and scalable; and they must connect to users – ideally in any conversation experience and language the user chooses. Bot Framework provides just what you need to build, connect, manage and publish intelligent bots that interact naturally wherever your users are talking – from text/sms to Skype, Slack, Facebook Messenger, Kik, Office 365 mail and other popular services. This lab will show you how to build a basic bot, connect it to a LUIS model, and get responses back.  
 
@@ -40,6 +32,10 @@ EXERCISE 3: CONNECTING THE DOTS
 - [In C#](#connecting-to-luis-in-csharp)
 - [In Node](#connecting-to-luis-in-node)
 
+[Additional Resources](#additional-resources)
+
+[Credit](#credit)
+
 ## Setup
 You must perform the following steps to prepare your computer for this lab:
 
@@ -63,6 +59,7 @@ Install [Node JS](https://nodejs.org/en/)
 
 ### Register a Bot
 Before we begin, we need to register a new bot on the bot framework website.
+
 1. Go to https://dev.botframework.com/  and click “Register a bot” at the top of the screen. 
 
     ![Register](images/register1.png)
@@ -170,6 +167,7 @@ Also notice your app is using port 8080. Keep a note of this as you will need to
 1. Keep your bot application running from the previous steps and make a note of the endpoint
     - If you've already closed the application, run your bot application again
     - Depending on which steps you followed, you endpoint should be `http://localhost:3978/api/messages` or `http://localhost:8080/api/messages`
+    
 2. Open the Bot Emulator and enter your endpoint where it says "Enter your endpoint URL"
 
     ![Emulator](images/emulator1.png)
@@ -183,7 +181,7 @@ Also notice your app is using port 8080. Keep a note of this as you will need to
 ### Bonus
 Remember these settings?
 
-    ![Emulator](images/emulator2.png)
+![Emulator](images/emulator2.png)
 
 You can fill these fields in with the values we got when we registered our bot in Task 1. You will need to do this when you start live debugging with ngrok (you can find out more about this from the [documentation](https://docs.botframework.com/en-us/node/builder/guides/core-concepts/#debugging-locally-using-ngrok)). To do that, first you have to update your application with the App ID and Password too.
 
@@ -196,6 +194,11 @@ You can fill these fields in with the values we got when we registered our bot i
     ![Bot ID & Password](images/appid2.png)
 
     ![Bot ID & Password](images/appid3.png)
+
+3. Finally, you will need to update your bot's endpoint in the [bot developer portal](https://dev.botframework.com/)
+    - NB: you only need to do this if you have deployed your bot to a web service or if you are using ngrok. This will not work with localhost
+
+    ![Register](images/register6.png)
 
 ## EXERCISE 2: ADD A LUIS MODEL
 
@@ -375,6 +378,15 @@ The above code has setup the LUIS model and matched our intents to dialogs in ou
 
 5. Go to the bot emulator and start entering test queries. When a intent of “GetWeather” is triggered, the bot will return a “GetWeather intent” message, intent of “BookFlight” will return “BookFlight intent”, and a “None” intent will return “No Intent”.  
 
+## Additional Resources
+[Bot Framework Samples for both Node and C#](https://github.com/Microsoft/BotBuilder-Samples)
 
+[Blog containing a master list of Bot Framework tutorials, samples and projects](https://blogs.msdn.microsoft.com/smich/2016/09/30/microsoft-bot-framework-resources/)
 
+## Credit
+By Lilian Kasem, February 2017
 
+Credit for writing the original C# workshop:
+- Darren Jefford
+- Anthony Sadarangani
+- Travis Hilbert
