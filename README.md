@@ -63,24 +63,25 @@ Install [Node JS](https://nodejs.org/en/)
 
 ### Register a Bot
 Before we begin, we need to register a new bot on the bot framework website.
-- Go to https://dev.botframework.com/  and click “Register a bot” at the top of the screen. 
+1. Go to https://dev.botframework.com/  and click “Register a bot” at the top of the screen. 
 
-![Register](images/register1.png)
+    ![Register](images/register1.png)
 
-- Give your bot a name, a bot handle, and give it a small description.
+2. Give your bot a name, a bot handle, and give it a small description.
 
-![Register](images/register2.png)
+    ![Register](images/register2.png)
 
-- In the Configuration section, click “Create Microsoft App ID and password”. On the next page, your App ID will be displayed (write this down). 
+3. In the Configuration section, click “Create Microsoft App ID and password”. On the next page, your App ID will be displayed (write this down). 
 
-![Register](images/register3.png)
+    ![Register](images/register3.png)
 
-- Click “Generate a password to continue”. Write down this password and keep it safe!  This is the only time the password will be displayed! Click “Ok” and then click “Finish and go back to Bot Framework” 
+4. Click “Generate a password to continue”. Write down this password and keep it safe!  This is the only time the password will be displayed! Click “Ok” and then click “Finish and go back to Bot Framework” 
 
-![Register](images/register4.png)
-![Register](images/register5.png)
+    ![Register](images/register4.png)
 
-- Fill out the rest of the required fields. Then click “Register”. 
+    ![Register](images/register5.png)
+
+5. Fill out the rest of the required fields. Then click “Register”. 
 
 ### Create a new Bot Application in CSharp
 If you are doing this lab on a MacBook (OSX): as currently there isn't a Bot Framework template for Visual Studio Mac, use the `MyFirstBot` project as your starting application for developing a C# bot on OSX. This application is exactly the same result you would get if you follow the steps below on Windows.
@@ -89,17 +90,17 @@ If you are doing this lab on a MacBook (OSX): as currently there isn't a Bot Fra
  
     Name your project **MyFirstBot** and select the file system location where you will save your solutions. Leave the options selected to **Create new solution** and **Create directory for solution**.
 
-![Create a new bot](images/csharpbot1.png)
+    ![Create a new bot](images/csharpbot1.png)
 
 2. Set your Solution Configuration to **Debug** and your Solution Platform to **Any CPU**. Select your favorite browser from the Debug Target dropdown menu. You can choose to debug/deploy on a phone device connected via USB outside of this lab.
 
-![Create a new bot](images/csharpbot2.png)
+    ![Create a new bot](images/csharpbot2.png)
 
 3. Build and run your app. You will see a blank app browser tab displaying the applications Default.htm
 
-![Create a new bot](images/csharpbot3.png)
+    ![Create a new bot](images/csharpbot3.png)
 
-**Keep note of the port your Bot is running on as well as the API URL to be used for testing your Bot. In this case, this is `http://localhost:3978/api/messages`**
+    **Keep note of the port your Bot is running on as well as the API URL to be used for testing your Bot. In this case, this is `http://localhost:3978/api/messages`**
 
 ### If you are doing this on a Macbook (OSX): 
 When the application launches, you may see a 404 Error `System.Web.HttpException. The resource cannot be found`. Don't worry about this for now as the application still works and this doesn't prevent you from completing the lab.
@@ -129,36 +130,36 @@ Also notice your app is using port 8080. Keep a note of this as you will need to
 
 7. Create a new file called `index.js` and paste the following code into it:
 
-```javascript
-var builder = require('botbuilder');
-var restify = require('restify');
+    ```javascript
+    var builder = require('botbuilder');
+    var restify = require('restify');
 
-//=========================================================
-// Bot Setup
-//=========================================================
+    //=========================================================
+    // Bot Setup
+    //=========================================================
 
-// Setup Restify Server
-var server = restify.createServer();
-server.listen(process.env.port || process.env.PORT || 3978, function () {
-   console.log('%s listening to %s', server.name, server.url); 
-});
-  
-// Create chat bot
-var connector = new builder.ChatConnector({
-    appId: process.env.MICROSOFT_APP_ID,
-    appPassword: process.env.MICROSOFT_APP_PASSWORD
-});
-var bot = new builder.UniversalBot(connector);
-server.post('/api/messages', connector.listen());
+    // Setup Restify Server
+    var server = restify.createServer();
+    server.listen(process.env.port || process.env.PORT || 3978, function () {
+    console.log('%s listening to %s', server.name, server.url); 
+    });
+    
+    // Create chat bot
+    var connector = new builder.ChatConnector({
+        appId: process.env.MICROSOFT_APP_ID,
+        appPassword: process.env.MICROSOFT_APP_PASSWORD
+    });
+    var bot = new builder.UniversalBot(connector);
+    server.post('/api/messages', connector.listen());
 
-//=========================================================
-// Bots Dialogs
-//=========================================================
+    //=========================================================
+    // Bots Dialogs
+    //=========================================================
 
-bot.dialog('/', function(session){
-    session.send("You sent %s which was %d characters", session.message.text, session.message.text.length);
-})
-```
+    bot.dialog('/', function(session){
+        session.send("You sent %s which was %d characters", session.message.text, session.message.text.length);
+    })
+    ```
 
 8. Build and run this project. You can do this in terminal or command promptt by calling `node index.js` and you should see the bot running at port t `3978`. The endpoint you need to communicate to your bo will be `http://localhost:3978/api/messages`
 
@@ -260,73 +261,72 @@ This next section will show you how to connect all the dots together and get you
 
 2. Next, we need to add code that will handle LUIS intents that are triggered from phrases entered into the Bot Emulator. Insert the following code snippet into the LUISApp file. 
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Builder.Luis;
-using Microsoft.Bot.Builder.Luis.Models;
+    ```csharp
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.Bot.Builder.Dialogs;
+    using Microsoft.Bot.Builder.Luis;
+    using Microsoft.Bot.Builder.Luis.Models;
 
-namespace MyFirstBot.TravelApp
-{
-    [LuisModel("LUIS App ID", "Subscription Key")]
-    [Serializable]
-    public class LUISApp : LuisDialog<object>
+    namespace MyFirstBot.TravelApp
     {
-        //Will run when a None intent is Triggered
-        [LuisIntent("")]
-        public async Task None(IDialogContext context, LuisResult result)
+        [LuisModel("LUIS App ID", "Subscription Key")]
+        [Serializable]
+        public class LUISApp : LuisDialog<object>
         {
-            //Add Custom code here.
-            string message = $"No Intent";
-            await context.PostAsync(message);
-            context.Wait(MessageReceived);
-        }
+            //Will run when a None intent is Triggered
+            [LuisIntent("")]
+            public async Task None(IDialogContext context, LuisResult result)
+            {
+                //Add Custom code here.
+                string message = $"No Intent";
+                await context.PostAsync(message);
+                context.Wait(MessageReceived);
+            }
 
-        //Will run when a GetWeather intent is Triggered
-        [LuisIntent("GetWeather")]
-        public async Task GetWeather(IDialogContext context, LuisResult result)
-        {
-            //Add Custom code here.
-            string message = $"GetWeather Intent";
-            await context.PostAsync(message);
-            context.Wait(MessageReceived);
-        }
-        
-        //Will run when a Bookflight intent is Triggered
-        [LuisIntent("BookFlight")]
-        public async Task BookFlight(IDialogContext context, LuisResult result)
-        {
-            //Add Custom code here.
-            string message = $"BookFlight Intent";
-            await context.PostAsync(message);
-            context.Wait(MessageReceived);
+            //Will run when a GetWeather intent is Triggered
+            [LuisIntent("GetWeather")]
+            public async Task GetWeather(IDialogContext context, LuisResult result)
+            {
+                //Add Custom code here.
+                string message = $"GetWeather Intent";
+                await context.PostAsync(message);
+                context.Wait(MessageReceived);
+            }
+            
+            //Will run when a Bookflight intent is Triggered
+            [LuisIntent("BookFlight")]
+            public async Task BookFlight(IDialogContext context, LuisResult result)
+            {
+                //Add Custom code here.
+                string message = $"BookFlight Intent";
+                await context.PostAsync(message);
+                context.Wait(MessageReceived);
+            }
         }
     }
-}
-
-```
+    ```
 3. Input your App ID and Subscription Key from your LUIS model. 
 
 4. Next we need to edit the `MessageController.cs` file and replace your code with the following:
 
-```csharp
-[BotAuthentication]
-public class MessagesController : ApiController
-{
-    public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
+    ```csharp
+    [BotAuthentication]
+    public class MessagesController : ApiController
     {
-        if (activity.Type == ActivityTypes.Message){
-            await Conversation.SendAsync(activity, () => new LUISApp());
+        public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
+        {
+            if (activity.Type == ActivityTypes.Message){
+                await Conversation.SendAsync(activity, () => new LUISApp());
+            }
+                
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+            return response;
         }
-            
-        var response = Request.CreateResponse(HttpStatusCode.OK);
-        return response;
     }
-}
-```
+    ```
 
 5. Rebuild your code and run it. 
 
@@ -337,17 +337,17 @@ public class MessagesController : ApiController
 
 1. Go back to the echo bot you made earlier and insert the following code into `index.js` (before the bot dialogs, and after `server.post('/api/messages', connector.listen());`)
 
-```javascript
-var model = process.env.LUIS_MODEL;
-var recognizer = new builder.LuisRecognizer(model);
-var intents = new builder.IntentDialog({ recognizers: [recognizer] });
+    ```javascript
+    var model = process.env.LUIS_MODEL;
+    var recognizer = new builder.LuisRecognizer(model);
+    var intents = new builder.IntentDialog({ recognizers: [recognizer] });
 
-bot.dialog('/', intents);
-intents.matches('None', '/none')
-.matches('GetWeather', '/getWeather')
-.matches('BookFlight', '/bookFlight')
-.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."))
-``` 
+    bot.dialog('/', intents);
+    intents.matches('None', '/none')
+    .matches('GetWeather', '/getWeather')
+    .matches('BookFlight', '/bookFlight')
+    .onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."))
+    ``` 
 
 2. You can either setup an environment variable called `LUIS_MODEL` with your LUIS endpoint or just replace `process.env.LUIS_MODEL;` in index.js
 
@@ -355,21 +355,21 @@ The above code has setup the LUIS model and matched our intents to dialogs in ou
 
 3. Delete any existing dialogs you have in the `Bots Dialogs` section and copy in this code:
 
-```javascript
-bot.dialog('/none', function(session){
-    session.send("No intent");
-})
+    ```javascript
+    bot.dialog('/none', function(session){
+        session.send("No intent");
+    })
 
-bot.dialog('/getWeather', function(session){
-    //Add custom code here to implent get weather feature
-    session.send("GetWeather intent");
-})
+    bot.dialog('/getWeather', function(session){
+        //Add custom code here to implent get weather feature
+        session.send("GetWeather intent");
+    })
 
-bot.dialog('/bookFlight', function(session){
-    //Add custom code here to implent book flight feature
-    session.send("BookFlight intent");
-})
-```
+    bot.dialog('/bookFlight', function(session){
+        //Add custom code here to implent book flight feature
+        session.send("BookFlight intent");
+    })
+    ```
 
 4. Rebuild your code and run it. 
 
