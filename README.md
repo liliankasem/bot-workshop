@@ -26,15 +26,15 @@ You must have the following to complete this lab:
 
 ## Contents
 EXERCISE 1: CREATE A BOT
-- Task 1 – [Register a Bot](#register-a-bot)
-- Task 2 – Create a new Bot Application
-    - [Click here for C#](#create-a-new-bot-application-in-csharp)
-    - [Click here for Node](#create-a-new-bot-application-in-node)
-- Task 3 – [Communicate with the bot in the Bot Emulator](#communicate-with-the-bot-in-the-bot-emulator)
+- [Register a Bot](#register-a-bot)
+- Create a new Bot Application
+    - [In C#](#create-a-new-bot-application-in-csharp)
+    - [In Node](#create-a-new-bot-application-in-node)
+- [Using the Bot Emulator](#using-the-bot-emulator)
 
 EXERCISE 2: ADD A LUIS MODEL
-- Task 1 – [Create a LUIS Application](#create-a-luis-application)
-- Task 2 – [Adding Intents](#adding-intents)
+- [Create a LUIS Application](#create-a-luis-application)
+- [Adding Intents](#adding-intents)
 
 EXERCISE 3: CONNECTING THE DOTS
 - [In C#](#connecting-to-luis-in-csharp)
@@ -53,10 +53,11 @@ First, install the [Bot Framework Emulator](https://aka.ms/bf-bc-emulator).
 
 ### C# (Mac)
 1.	Install [Visual Studio for Mac Preview](https://www.visualstudio.com/vs/visual-studio-mac)
-2.	Download ‘MyFirstBot’ project from this [workshops GitHub repo](https://github.com/liliankasem/bot-workshop/tree/master/MyFirstBot)
+2.	Download the `MyFirstBot` project from this [workshops GitHub repo](https://github.com/liliankasem/bot-workshop/tree/master/MyFirstBot)
 
 ### Node
-1.	Install [Node JS](https://nodejs.org/en/)
+Install [Node JS](https://nodejs.org/en/)
+
 
 ## EXERCISE 1: CREATE A BOT
 
@@ -82,21 +83,21 @@ Before we begin, we need to register a new bot on the bot framework website.
 - Fill out the rest of the required fields. Then click “Register”. 
 
 ### Create a new Bot Application in CSharp
-If you are doing this lab on a MacBook (OSX): as there is not currently a Bot Framework template for Visual Studio Mac, use the MyFirstBot project as your starting application for developing a C# bot on OSX. This application is exactly the same result you would get if you follow the steps below on Windows.
+If you are doing this lab on a MacBook (OSX): as currently there isn't a Bot Framework template for Visual Studio Mac, use the `MyFirstBot` project as your starting application for developing a C# bot on OSX. This application is exactly the same result you would get if you follow the steps below on Windows.
 
 1. In a new instance of Visual Studio 2015, choose **File > New> Project** to open the New Project dialog. Navigate to **Installed > Templates > Visual C#** and select the **Bot Application** template.
  
     Name your project **MyFirstBot** and select the file system location where you will save your solutions. Leave the options selected to **Create new solution** and **Create directory for solution**.
 
-![Create a new bot](images/c#bot1.png)
+![Create a new bot](images/csharpbot1.png)
 
 2. Set your Solution Configuration to **Debug** and your Solution Platform to **Any CPU**. Select your favorite browser from the Debug Target dropdown menu. You can choose to debug/deploy on a phone device connected via USB outside of this lab.
 
-![Create a new bot](images/c#bot2.png)
+![Create a new bot](images/csharpbot2.png)
 
 3. Build and run your app. You will see a blank app browser tab displaying the applications Default.htm
 
-![Create a new bot](images/c#bot3.png)
+![Create a new bot](images/csharpbot3.png)
 
 **Keep note of the port your Bot is running on as well as the API URL to be used for testing your Bot. In this case, this is `http://localhost:3978/api/messages`**
 
@@ -113,21 +114,20 @@ Also notice your app is using port 8080. Keep a note of this as you will need to
 3. Make a new directory (the location you will store your bot application) and then change directory into that folder
     - In this case, I've created a new dicrecotry 'myfirstbot' in my Documents
 
-![Create a new bot](images/nodebot1.png)
+    ![Create a new bot](images/nodebot1.png)
 
 4. Run `npm init` and fill out the fields. Generally, you can just hit enter all the way through. This will create an empty node project.
 
-![Create a new bot](images/nodebot2.png)
+    ![Create a new bot](images/nodebot2.png)
 
 5. Run `npm install --save restify`. This will download the restify package required and save the dependacy to the `package.json` file. Restify is required as we need a server to listen for messages at a given port.
 
-6. Open this project in your favourite IDE and you should be able to see the following structure:
+6. Open this project in your favourite IDE and you should be able to see the following structure and package.json should also show the dependencies we just installed.
 
-![Create a new bot](images/nodebot3.png)
+    ![Create a new bot](images/nodebot3.png)
 
-package.json should also should you the dependencies we just installed.
 
-Create a new file called `index.js` and paste the following code into it:
+7. Create a new file called `index.js` and paste the following code into it:
 
 ```javascript
 var builder = require('botbuilder');
@@ -158,44 +158,43 @@ server.post('/api/messages', connector.listen());
 bot.dialog('/', function(session){
     session.send("You sent %s which was %d characters", session.message.text, session.message.text.length);
 })
-
 ```
 
-7. Build and run this project. You can do this in terminal or command promptt by calling `node index.js` and you should see the bot running at port t `3978`. The endpoint you need to communicate to your bo will be `http://localhost:3978/api/messages`
+8. Build and run this project. You can do this in terminal or command promptt by calling `node index.js` and you should see the bot running at port t `3978`. The endpoint you need to communicate to your bo will be `http://localhost:3978/api/messages`
 
-![Create a new bot](images/nodebot4.png)
+    ![Create a new bot](images/nodebot4.png)
 
-### Communicate with the bot in the Bot Emulator
+### Using the Bot Emulator
 
 1. Keep your bot application running from the previous steps and make a note of the endpoint
     - If you've already closed the application, run your bot application again
     - Depending on which steps you followed, you endpoint should be `http://localhost:3978/api/messages` or `http://localhost:8080/api/messages`
 2. Open the Bot Emulator and enter your endpoint where it says "Enter your endpoint URL"
 
-![Emulator](images/emulator1.png)
+    ![Emulator](images/emulator1.png)
 
 3. You should then see the same configuration settings as the image below. We go these details from the portol in Task 1. For now you can leave these blank and just press "Connect". If you type a message now, you should see your bot in action.
 
-![Emulator](images/emulator2.png)
+    ![Emulator](images/emulator2.png)
 
-![Emulator](images/emulator3.png)
+    ![Emulator](images/emulator3.png)
 
 ### Bonus
 Remember these settings?
 
-![Emulator](images/emulator2.png)
+    ![Emulator](images/emulator2.png)
 
 You can fill these fields in with the values we got when we registered our bot in Task 1. You will need to do this when you start live debugging with ngrok (you can find out more about this from the [documentation](https://docs.botframework.com/en-us/node/builder/guides/core-concepts/#debugging-locally-using-ngrok)). To do that, first you have to update your application with the App ID and Password too.
 
 1. In C#, open `Web.config` and replace the `AppId` and `AppPassword` with the correct values from your [bot developer portal](https://dev.botframework.com/)
 
-![Bot ID & Password](images/appid1.png)
+    ![Bot ID & Password](images/appid1.png)
 
 2. In Node, if your IDE supports environment variables you can use that as a way of setting the `AppId` and `AppPassword` (as shown in image 1). Otherwise, just replace the values in index.js (as shown in image 2).
 
-![Bot ID & Password](images/appid2.png)
+    ![Bot ID & Password](images/appid2.png)
 
-![Bot ID & Password](images/appid3.png)
+    ![Bot ID & Password](images/appid3.png)
 
 ## EXERCISE 2: ADD A LUIS MODEL
 
@@ -204,11 +203,11 @@ You can fill these fields in with the values we got when we registered our bot i
 1.	Go to [luis.ai](https://luis.ai) and log in. 
 2.	Click “New App” in the top left corner of the page and click “New Application” from the drop down menu.
 
-![LUIS](images/luis1.png)
+    ![LUIS](images/luis1.png)
 
 3. In the pop up, name your new LUIS model, give it a description, and choose the application culture. Next, click “Add App”. 
 
-![LUIS](images/luis2.png)
+    ![LUIS](images/luis2.png)
 
 4. When your application is finished provisioning, it will take you to the main page of your new LUIS model. Next, you will train your Luis model.
 
@@ -217,11 +216,11 @@ Next, we will add two intents to the application.
 
 1. Click the “+” next to intents and make a “BookFlight” intent. Name it “BookFlight” and give it an example utterance, “Book flight to Paris”, then click save. 
 
-![LUIS](images/luis3.png)
+    ![LUIS](images/luis3.png)
 
 2. Your utterance will come up for labelling. Make sure “BookFlight” is selected in the drop down menu and click “Submit” to submit the utterance to your LUIS app. 
 
-![LUIS](images/luis4.png)
+    ![LUIS](images/luis4.png)
 
 3. Now add a second intent called “GetWeather”, with the example command of “How is the weather in London”. Click “Save”, and accept the presented utterance as a “GetWeather” intent and click “Submit”.
 
@@ -234,7 +233,7 @@ You can have the ability to define relationships between entities based on hered
 4.	Next, click “+” next to “Entity Children” and add a “FromLocation” entity.   
 5.	When finished, click “Save”. 
 
-![LUIS](images/luis5.png)
+    ![LUIS](images/luis5.png)
 
 ### Using Pre-Built Entities 
 Next, we are going to add a Pre-Built datetime entity. 
@@ -242,7 +241,7 @@ Next, we are going to add a Pre-Built datetime entity.
 2.	Scroll down and select “datetime” from the lift of Pre-Built entities” 
 3.	Then click “Ok”. It’s as easy as that. 
 
-![LUIS](images/luis6.png)
+    ![LUIS](images/luis6.png)
 
 
 ### Training your model
