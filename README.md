@@ -313,24 +313,27 @@ This next section will show you how to connect all the dots together and get you
     ```
 3. Input your App ID and Subscription Key from your LUIS model. 
 
-4. Next we need to edit the `MessageController.cs` file and replace your code with the following:
+4. Next we need to edit the `MessageController.cs` file and replace the ```Post``` method with the following:
 
     ```csharp
-    [BotAuthentication]
-    public class MessagesController : ApiController
+    public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
     {
-        public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
-        {
-            if (activity.Type == ActivityTypes.Message){
-                await Conversation.SendAsync(activity, () => new LUISApp());
-            }
-                
-            var response = Request.CreateResponse(HttpStatusCode.OK);
-            return response;
+        if (activity.Type == ActivityTypes.Message){
+            await Conversation.SendAsync(activity, () => new LUISApp());
         }
+
+        var response = Request.CreateResponse(HttpStatusCode.OK);
+        return response;
     }
     ```
-
+    
+    Also make sure the following are imported:
+    
+    ```csharp
+    using Microsoft.Bot.Builder.Dialogs;
+    using MyFirstBot.TravelApp;
+    ```
+    
 5. Rebuild your code and run it. 
 
 6. Go to the bot emulator and start entering test queries. When an intent of “GetWeather” is triggered, the bot will return “GetWeather”, and the intent of “BookFlight” will return “BookFlight”, and a “None” intent will return “No Intent”.  
