@@ -205,53 +205,84 @@ You can fill these fields in with the values we got when we registered our bot i
 ### Create a LUIS Application
 
 1.	Go to [luis.ai](https://luis.ai) and log in. 
-2.	Click “New App” in the top left corner of the page and click “New Application” from the drop down menu.
+2.	Click "My apps” in the top menu bar and click “New App".
 
     ![LUIS](images/luis1.png)
 
-3. In the pop up, name your new LUIS model, give it a description, and choose the application culture. Next, click “Add App”. 
+3. In the pop up: name your new LUIS model, give it a description, and choose the application culture. Click "Create”. 
 
     ![LUIS](images/luis2.png)
 
-4. When your application is finished provisioning, it will take you to the main page of your new LUIS model. Next, you will train your Luis model.
+4. When your application is finished provisioning, it will take you to the main page of your new LUIS model. Next, you will train your LUIS model.
 
 ### Adding Intents
 Next, we will add two intents to the application.  
 
-1. Click the “+” next to intents and make a “BookFlight” intent. Name it “BookFlight” and give it an example utterance, “Book flight to Paris”, then click save. 
+1. Navigate to the "Intents" page through the left hand menu then click the “Add Intent” button and make a “BookFlight” intent (name it “BookFlight”)
 
     ![LUIS](images/luis3.png)
 
-2. Your utterance will come up for labelling. Make sure “BookFlight” is selected in the drop down menu and click “Submit” to submit the utterance to your LUIS app. 
+2. Add an utterance to the "BookFlight" intent, for example "Book flight to Paris”, then click "Save".
 
     ![LUIS](images/luis4.png)
 
-3. Now add a second intent called “GetWeather”, with the example command of “How is the weather in London”. Click “Save”, and accept the presented utterance as a “GetWeather” intent and click “Submit”.
+
+3. Now following the same steps as above: add a second intent called “GetWeather”, add the utterance “How is the weather in London”, then click “Save”. 
 
 ### Defining entities/Hierarchical entities 
 You can have the ability to define relationships between entities based on hereditary hierarchical patterns. The generic entity acts as the parent and the children are the specific types/sub groups under the parent, yet both share the same characteristics. An example of this could be our Location.
 
-1.	To add entities, click the “+” button next to the “Entities” section on the left of the screen, and name it “Location”. 
-2.	Next, click “Include Children” and “Hierarchical” 
-3.	Add a “ToLocation” entity.
-4.	Next, click “+” next to “Entity Children” and add a “FromLocation” entity.   
-5.	When finished, click “Save”. 
+1.	To add entities, navigate to the "Entities" tab through the left side menu and click the “Add custom entity” button.
 
     ![LUIS](images/luis5.png)
+
+2.	Name the entity "Location" and select the entity type “Hierarchical”.
+3.  Click "+ Add Child".
+3.	Name the first child entity “ToLocation”.
+4.	Next, click “+ Add Child” again and name the second child entity “FromLocation”.   
+5.	When finished, click “Save”. 
+
+    ![LUIS](images/luis6.png)
 
 ### Using Pre-Built Entities 
 Next, we are going to add a Pre-Built datetime entity. 
 
-1.	To add a Pre-Built Entity, click “+” next to “Pre-built Entities” at the left of the screen.
-2.	Scroll down and select “datetime” from the lift of Pre-Built entities” 
-3.	Then click “Ok”. It’s as easy as that. 
+1.	To add a Pre-Built Entity, click “Add prebuilt entity”
 
-    ![LUIS](images/luis6.png)
+    ![LUIS](images/luis7.png)
+
+2.	Tick the “datetime” checkbox from the list of Pre-Built entities.
+3.	Then click “Save”
+
+    ![LUIS](images/luis8.png)
 
 ### Training your model
-Now that we have the intents and entities defined, we now need to provide more examples of utterances that illustrate these concepts. Click the text box at the top of the screen and start typing in example utterances. You will need to input and label at least five examples of each intent in order to get an accurate model. 
+Now that we have the intents and entities defined, we now need to provide more examples of utterances that illustrate these concepts. Navigate back to the "Intents" page through the left side menu.
 
-Next click “Train”, located at the bottom left of the page, and wait for the completed message to appear. Then click “Publish” at the top left of the screen and click “Publish web service”. A URL will appear with your application id and your subscription key. Write these down and keep them safe. You will be using these later. 
+Select an intent you have created, click the text box at the top of the screen and start typing in example utterances. You will need to input and label at least 10 examples of each intent in order to get an accurate model, then "Save". The images below show how the "BookFlight" utterances were labeled. 
+
+![LUIS](images/luis9.png)
+
+![LUIS](images/luis10.png)
+
+![LUIS](images/luis11.png)
+
+
+Do the same as above for the "GetWeather" intent. (Notice how in the image below we only set the label for the locations as "Location" and not the children such as "Location::ToLocation", we don't need the child entities in the "GetWeather" scenario).
+
+![LUIS](images/luis12.png)
+
+Next, navigate to “Train & Test” page through the side menu, and click "Train Application".
+
+![LUIS](images/luis13.png)
+
+Once the training has finished, navigate to the "Publish App" page, select your "Endpoint key", select an "Endpoint slot" and click "Publish". If you don't have an endpoint key, follow the steps provided when you click on the "Add a new key to your account" link.
+
+![LUIS](images/luis14.png)
+
+When published, a URL will appear with your application ID and your subscription key (endpoint key). Write these down and keep them safe. You will be using these later.
+
+![LUIS](images/luis15.png) 
 
 Now it’s time to connect the dots. 
 
