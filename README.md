@@ -412,7 +412,7 @@ This next section will show you how to connect all the dots together and get you
 
 4. Rebuild your code and run it. 
 
-5. Go to the bot emulator and start entering test queries. When a intent of “GetWeather” is triggered, the bot will return a “GetWeather intent” message, intent of “BookFlight” will return “BookFlight intent”, and a “None” intent will return “No Intent”.  
+5. Go to the bot emulator and start entering test queries. When the “GetWeather” intent is triggered, the bot will return a message saying “GetWeather intent”; the intent of “BookFlight” will return a message saying “BookFlight intent”; and a “None” intent will return “No Intent”.
 
 ## Additional Resources
 [Bot Framework Samples for Node and C#](https://github.com/Microsoft/BotBuilder-Samples)
