@@ -49,7 +49,7 @@ First, install the [Bot Framework Emulator](https://aka.ms/bf-bc-emulator).
 
 ### C# (Mac)
 1.	Install [Visual Studio for Mac Preview](https://www.visualstudio.com/vs/visual-studio-mac)
-2.	Download the `MyFirstBot` project from this [workshops GitHub repo](https://github.com/liliankasem/bot-workshop/tree/master/MyFirstBot)
+2.	Download the `MyFirstBot` project from this [workshop's GitHub repo](https://github.com/liliankasem/bot-workshop/tree/master/MyFirstBot)
 
 ### Node
 Install [Node JS](https://nodejs.org/en/)
@@ -118,14 +118,16 @@ Also notice your app is using port 8080. Keep a note of this as you will need to
 
     ![Create a new bot](images/nodebot2.png)
 
-5. Run `npm install --save restify`. This will download the restify package required and save the dependacy to the `package.json` file. Restify is required as we need a server to listen for messages at a given port.
+5. Run `npm install --save botbuilder`. This will download the botbuilder package required and save the dependacy to the `package.json` file. 'botbuilder' is the node bot framework SDK that will provide you with everythign you need to build a bot.
 
-6. Open this project in your favourite IDE and you should be able to see the following structure and package.json should also show the dependencies we just installed.
+6. Run `npm install --save restify`. This will download the restify package required and save the dependacy to the `package.json` file. Restify is required as we need a server to listen for messages at a given port.
+
+7. Open this project in your favourite IDE and you should be able to see the following structure and package.json should also show the dependencies we just installed.
 
     ![Create a new bot](images/nodebot3.png)
 
 
-7. Create a new file called `index.js` and paste the following code into it:
+8. Create a new file called `index.js` and paste the following code into it:
 
     ```javascript
     var builder = require('botbuilder');
@@ -158,7 +160,7 @@ Also notice your app is using port 8080. Keep a note of this as you will need to
     })
     ```
 
-8. Build and run this project. You can do this in terminal or command promptt by calling `node index.js` and you should see the bot running at port t `3978`. The endpoint you need to communicate to your bo will be `http://localhost:3978/api/messages`
+9. Build and run this project. You can do this in terminal or command promptt by calling `node index.js` and you should see the bot running at port `3978`. The endpoint you need to communicate with your bot will be `http://localhost:3978/api/messages`
 
     ![Create a new bot](images/nodebot4.png)
 
