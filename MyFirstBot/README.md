@@ -1,10 +1,10 @@
 # MyFirstBot
 
-As there is not currently a Bot Framework template for Visual Studio Mac, use this bot at your starting application for developing a C# bot on OSX. 
+As currently there is not a Bot Framework template for Visual Studio Mac, use this bot at your starting application for developing a C# bot on OSX. 
 
 - Open this solution in [Visual Studio for Mac Preview](https://www.visualstudio.com/vs/visual-studio-mac)
 - Restore all packages
-- Build and Run the application
+- Build and run the application
 
 When the application launches, you may see a 404 Error `System.Web.HttpException. The resource cannot be found`. Don't worry about this for now as the application still works and this doesn't prevent you from completing the lab.
 
